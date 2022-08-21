@@ -44,15 +44,15 @@ class Robot {
     }
 
     left() {
-        console.log("Lefted");
-        // Rotate the robot 90 degrees left
-        // TODO make direction an enum between 1 and 4 and use modulo to do this cool instead of just a switch statement?
+        // Get directions index of current direction
+        let currentDirection = directions.indexOf(this.direction);
+        // +3 % 4 will always move the direction 1 down in the array.
+        this.direction = directions[(currentDirection + 3) % 4];
     }
 
     right() {
-        console.log("Righted");
-        // Rotate the robot 90 degrees right
-        // TODO as above but the other way.
+        let currentDirection = directions.indexOf(this.direction);
+        this.direction = directions[(currentDirection + 1) % 4];
     }
 
     report() {
