@@ -51,3 +51,4 @@ Scattered throughout the code you will find some comments discussing why I have 
 
 Command Pattern? Should we instantiate a table class that knows where the robot(s) is(are) and tracks them plus is responsible for issuing individual robots their commands? Without proper use cases in mind for expansion this feels like over engineering for now and I will stick with the robot being self contained for YAGNI reasons.
 
+The constraint of not falling off the table on Placement isn't very clear on what to do if the direction is invalid, I will assume it counts as 'off the table' if someone faces the robot in anything other than the classic NESW.

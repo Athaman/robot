@@ -24,6 +24,7 @@ class Robot {
     }
 
     move() {
+        if (!this.isOnTable()) return;
         // Move forward one square as per the "direction" attribute.
         // Confirm the location is on the board and ignore the command entirely if it isn't.
         let x = this.x;
@@ -43,7 +44,8 @@ class Robot {
         this.y = y;
     }
 
-    left() {
+    left() {        
+        if (!this.isOnTable()) return;
         // Get directions index of current direction
         let currentDirection = directions.indexOf(this.direction);
         // +3 % 4 will always move the direction 1 down in the array.
@@ -51,11 +53,13 @@ class Robot {
     }
 
     right() {
+        if (!this.isOnTable()) return;
         let currentDirection = directions.indexOf(this.direction);
         this.direction = directions[(currentDirection + 1) % 4];
     }
 
     report() {
+        if (!this.isOnTable()) return;
         console.log(`
         Robot is located at:
         x: ${this.x},
@@ -76,13 +80,21 @@ class Robot {
         }
     }
 
+    isOnTable() {
+        // There should be no way 1 is undefined while the others are but may as well check em all.
+        if (this.x === undefined || this.y === undefined || this.direction === undefined) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }
 
 
 const robot = new Robot();
 
 // Since this is a command line interface we will open up with a user entry prompt and handle it accordingly then call for another prompt
-// The spec doesn't detail an exit command but I assume we want to be able to leave this without sending a signal interrupt
 // Text commands from user will be parsed and routed to command the robot.
 const requestInput = () => {
     const input = prompt("Please enter a command: ");
@@ -113,6 +125,7 @@ const parseInput = (input) => {
             case 'REPORT':
                 robot.report()
                 break;
+            // The spec doesn't detail an exit command but I assume we want to be able to leave this without sending a signal interrupt
             case 'q':
                 console.log("Kthxbai");
                 process.exit();
@@ -120,7 +133,8 @@ const parseInput = (input) => {
                 console.log("That didn't seem like a legit command... try again?");
         }
     } catch (error) {
-        console.error(error);
+        // Silently ignoring fails for the win. Really this should be given to the user as some kind of feedback.
+        // console.error(error);
     }
     requestInput();
 }
