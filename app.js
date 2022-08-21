@@ -1,5 +1,7 @@
 const prompt = require('prompt-sync')({sigint: true});
 
+const directions = ['NORTH', 'EAST', 'SOUTH', 'WEST'];
+
 class Robot {
     constructor() {
         // For this example the constructor should be decoupled from the PLACE command but in other scenarios they could be combined
@@ -13,9 +15,11 @@ class Robot {
 
     // Take an existing robot and place it on the table. Can be called when robot is already on table. Cannot fall off table.
     place(x, y, direction) {
-        console.log("Placed");
         // Set robot's coordinates as per given commands
         // Check to see if placement is on table and ignore command entirely if it isn't.
+        this.x = x;
+        this.y = y;
+        this.direction = direction;
     }
 
     move() {
@@ -37,8 +41,24 @@ class Robot {
     }
 
     report() {
-        console.log("Reported");
-        // Console log out the robots location and direction.
+        console.log(`
+        Robot is located at:
+        x: ${this.x},
+        y: ${this.y},
+        facing: ${this.direction}
+        `);
+    }
+
+    amIDead(x, y, direction) {
+        if (x > 4 || x < 0) {
+            throw new Error ("Looks like your robot would have fallen off the side edge so we ignored that one");
+        }
+        if (y > 4 || y < 0) {
+            throw new Error ("Looks like your robot would have fallen off the top or bottom edge so we ignored that one");
+        }
+        if (!directions.includes(direction)) {
+            throw new Error (`There are 4 directions that we work with around here and ${direction} ain't one of them`);
+        }
     }
 
 }
@@ -77,6 +97,7 @@ const parseInput = (input) => {
             robot.report()
             break;
         case 'q':
+            console.log("Kthxbai");
             process.exit();
         default: 
             console.log("That didn't seem like a legit command... try again?");
