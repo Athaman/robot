@@ -17,15 +17,30 @@ class Robot {
     place(x, y, direction) {
         // Set robot's coordinates as per given commands
         // Check to see if placement is on table and ignore command entirely if it isn't.
+        this.amIDead(x, y, direction);
         this.x = x;
         this.y = y;
         this.direction = direction;
     }
 
     move() {
-        console.log("Moved");
         // Move forward one square as per the "direction" attribute.
         // Confirm the location is on the board and ignore the command entirely if it isn't.
+        let x = this.x;
+        let y = this.y;
+        let direction = this.direction;
+        if (direction === 'NORTH') {
+            y++;
+        } else if (direction === 'EAST') {
+            x++;
+        } else if (direction === 'SOUTH') {
+            y--;
+        } else if (direction === 'WEST') {
+            x--;
+        }
+        this.amIDead(x, y, direction);
+        this.x = x;
+        this.y = y;
     }
 
     left() {
@@ -80,27 +95,32 @@ const parseInput = (input) => {
     // Could also toLowerCase it to prevent caps sensitivity but the instructions seemed pretty keen on PLACE so I'll leave it
     const inputs = input.split(' ');
     const command = inputs[0]
-    switch (command) {
-        case 'PLACE': 
-            robot.place(inputs[1], inputs[2], inputs[3]);
-            break;
-        case 'MOVE':
-            robot.move()
-            break;
-        case 'LEFT':
-            robot.left()
-            break;
-        case 'RIGHT': 
-            robot.right()
-            break;
-        case 'REPORT':
-            robot.report()
-            break;
-        case 'q':
-            console.log("Kthxbai");
-            process.exit();
-        default: 
-            console.log("That didn't seem like a legit command... try again?");
+    try {
+
+        switch (command) {
+            case 'PLACE': 
+                robot.place(inputs[1], inputs[2], inputs[3]);
+                break;
+            case 'MOVE':
+                robot.move()
+                break;
+            case 'LEFT':
+                robot.left()
+                break;
+            case 'RIGHT': 
+                robot.right()
+                break;
+            case 'REPORT':
+                robot.report()
+                break;
+            case 'q':
+                console.log("Kthxbai");
+                process.exit();
+            default: 
+                console.log("That didn't seem like a legit command... try again?");
+        }
+    } catch (error) {
+        console.error(error);
     }
     requestInput();
 }
