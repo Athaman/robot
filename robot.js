@@ -17,6 +17,7 @@ module.exports = class Robot {
         // Set robot's coordinates as per given commands
         // Check to see if placement is on table and ignore command entirely if it isn't.
         this.amIDead(x, y, direction);
+        console.log('whargarbl');
         this.x = x;
         this.y = y;
         this.direction = direction;
