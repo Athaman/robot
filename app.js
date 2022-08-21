@@ -11,27 +11,41 @@ class Robot {
 
     // Take an existing robot and place it on the table. Can be called when robot is already on table. Cannot fall off table.
     place(x, y, direction) {
+        console.log("Placed");
         // Set robot's coordinates as per given commands
         // Check to see if placement is on table and ignore command entirely if it isn't.
     }
 
     move() {
+        console.log("Moved");
         // Move forward one square as per the "direction" attribute.
         // Confirm the location is on the board and ignore the command entirely if it isn't.
     }
 
     left() {
+        console.log("Lefted");
         // Rotate the robot 90 degrees left
         // TODO make direction an enum between 1 and 4 and use modulo to do this cool instead of just a switch statement?
     }
 
     right() {
+        console.log("Righted");
         // Rotate the robot 90 degrees right
         // TODO as above but the other way.
     }
 
     report() {
+        console.log("Reported");
         // Console log out the robots location and direction.
     }
 
 }
+
+
+const robot = new Robot();
+
+robot.place();
+robot.move();
+robot.left();
+robot.right();
+robot.report();
