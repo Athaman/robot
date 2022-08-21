@@ -4,6 +4,7 @@ const example = new Robot();
 
 // Since this is a command line interface we will open up with a user entry prompt and handle it accordingly then call for another prompt
 // Text commands from user will be parsed and routed to command the robot.
+// The requestInput and parseInput could be offloaded to their own file inside say menu.js and should be if the project gets any more complex
 const requestInput = () => {
     const input = prompt("Please enter a command: ");
     parseInput(input);
