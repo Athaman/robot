@@ -1,3 +1,5 @@
+const prompt = require('prompt-sync')({sigint: true});
+
 class Robot {
     constructor() {
         // For this example the constructor should be decoupled from the PLACE command but in other scenarios they could be combined
@@ -44,8 +46,42 @@ class Robot {
 
 const robot = new Robot();
 
-robot.place();
-robot.move();
-robot.left();
-robot.right();
-robot.report();
+// Since this is a command line interface we will open up with a user entry prompt and handle it accordingly then call for another prompt
+// The spec doesn't detail an exit command but I assume we want to be able to leave this without sending a signal interrupt
+// Text commands from user will be parsed and routed to command the robot.
+const requestInput = () => {
+    const input = prompt("Please enter a command: ");
+    parseInput(input);
+}
+
+const parseInput = (input) => {
+    // TODO defensify this further, at the moment input should always be a string from the prompt-sync library so this should work fine but could be made more detailed
+    // Could also use regex to find commands inside of strings in case of a bump character at the start
+    // Could also toLowerCase it to prevent caps sensitivity but the instructions seemed pretty keen on PLACE so I'll leave it
+    const inputs = input.split(' ');
+    const command = inputs[0]
+    switch (command) {
+        case 'PLACE': 
+            robot.place(inputs[1], inputs[2], inputs[3]);
+            break;
+        case 'MOVE':
+            robot.move()
+            break;
+        case 'LEFT':
+            robot.left()
+            break;
+        case 'RIGHT': 
+            robot.right()
+            break;
+        case 'REPORT':
+            robot.report()
+            break;
+        case 'q':
+            process.exit();
+        default: 
+            console.log("That didn't seem like a legit command... try again?");
+    }
+    requestInput();
+}
+
+requestInput();
