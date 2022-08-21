@@ -48,3 +48,6 @@ move that would cause the robot to fall must be ignored.
 
 # Design decisions and assumptions
 Scattered throughout the code you will find some comments discussing why I have chosen specific implementation choices but here I would like to call out that I have opted not to utilise existing packages available on NPM to make the project cleaner and prettier simply because I assume the challenge is to write your own code and not utilise projects like Commander, Chalk, and other existing command line utility packages.
+
+Command Pattern? Should we instantiate a table class that knows where the robot(s) is(are) and tracks them plus is responsible for issuing individual robots their commands? Without proper use cases in mind for expansion this feels like over engineering for now and I will stick with the robot being self contained for YAGNI reasons.
+
