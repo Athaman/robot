@@ -45,3 +45,6 @@ The application should handle error states appropriately and be robust to user i
 # Constraints:
 The toy robot must not fall off the table during movement. This also includes the initial placement of the toy robot. Any
 move that would cause the robot to fall must be ignored.
+
+# Design decisions and assumptions
+Scattered throughout the code you will find some comments discussing why I have chosen specific implementation choices but here I would like to call out that I have opted not to utilise existing packages available on NPM to make the project cleaner and prettier simply because I assume the challenge is to write your own code and not utilise projects like Commander, Chalk, and other existing command line utility packages.
