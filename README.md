@@ -1,6 +1,11 @@
 # robot
 A toy robot coding challenge repository
 
+# running this project
+git clone it down
+run npm install in the local folder
+use `node app.js` to get going
+
 
 # instructions
 The Toy Robot coding challenge is described in the following pages. Please review and complete an implementation that
