@@ -17,7 +17,6 @@ module.exports = class Robot {
         // Set robot's coordinates as per given commands
         // Check to see if placement is on table and ignore command entirely if it isn't.
         this.amIDead(x, y, direction);
-        console.log('whargarbl');
         this.x = x;
         this.y = y;
         this.direction = direction;
@@ -69,6 +68,7 @@ module.exports = class Robot {
     }
 
     amIDead(x, y, direction) {
+        console.log(x, y, direction);
         if (x > 4 || x < 0) {
             throw new Error ("Looks like your robot would have fallen off the side edge so we ignored that one");
         }
