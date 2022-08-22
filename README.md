@@ -4,7 +4,8 @@ A toy robot coding challenge repository
 # running this project
 git clone it down
 run npm install in the local folder
-use `node app.js` to get going
+use `node app.js` or `npm start` to get going
+use `npm run test` to start the jest suite
 
 
 # instructions
@@ -57,3 +58,6 @@ Scattered throughout the code you will find some comments discussing why I have 
 Command Pattern? Should we instantiate a table class that knows where the robot(s) is(are) and tracks them plus is responsible for issuing individual robots their commands? Without proper use cases in mind for expansion this feels like over engineering for now and I will stick with the robot being self contained for YAGNI reasons.
 
 The constraint of not falling off the table on Placement isn't very clear on what to do if the direction is invalid, I will assume it counts as 'off the table' if someone faces the robot in anything other than the classic NESW.
+
+# TODOS
+Write many more tests, gotta do happy path and fail path for each function and method. Add more edge cases into the user input section in particular, at the moment I'm mostly trusting to an external library to handle that. Could afford to put in a few integration tests as well.
